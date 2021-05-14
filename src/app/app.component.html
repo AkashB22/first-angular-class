@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-primary"
+        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <div *ngIf="!onlyOdd; else elseBlock;">
+          <li
+            class="list-group-item"
+            *ngFor="let number of numbers" 
+            [ngClass]="{'odd': (number % 2 !== 0)}" 
+            [ngStyle]="{'backgroundColor': (number % 2 !== 0) ? 'yellow' : 'white'}">
+              {{number}}
+          </li>
+        </div>
+        <!-- <div *ngIf="onlyOdd">
+          <li 
+            class="list-group-item"
+            *ngFor="let oddNumber of oddNumbers"
+            [ngClass]="{'odd': (number % 2 !== 0)}" 
+            [ngStyle]="{'backgroundColor': (number % 2 !== 0) ? 'yellow' : 'white'}">
+            {{oddNumber}}
+          </li>
+        </div> -->
+        <!-- <ng-template [ngIf]="onlyOdd">
+          <div>
+            <li 
+              class="list-group-item"
+              *ngFor="let oddNumber of oddNumbers"
+              [ngClass]="{'odd': (number % 2 !== 0)}" 
+              [ngStyle]="{'backgroundColor': (number % 2 !== 0) ? 'yellow' : 'white'}">
+              {{oddNumber}}
+            </li>
+          </div>
+        </ng-template> -->
+        <ng-template [appUnless]="onlyOdd">
+          <li 
+            class="list-group-item"
+            *ngFor="let oddNumber of oddNumbers"
+            [ngClass]="{'odd': (number % 2 !== 0)}" 
+            [ngStyle]="{'backgroundColor': (number % 2 !== 0) ? 'yellow' : 'white'}">
+            {{oddNumber}}
+          </li>
+        </ng-template>
+      </ul>
+      <ng-template [ngIf]="onlyOdd">
+        <p>Only odd</p>
+      </ng-template>
+      <p appBasicHighlight>This Element is styled from basic highlight</p>
+      <p appBetterHighlight>This Element is styled from better highlight</p>
+      <p appBetterHighlight [defaultColor]="'transparent'">This Element is styled from better highlight</p>
+      <p appBetterHighlight [defaultColor]="'aliceblue'" [highlightColor]="'lavender'">This Element is styled from better highlight</p>
+    </div>
+  </div>
+</div>
